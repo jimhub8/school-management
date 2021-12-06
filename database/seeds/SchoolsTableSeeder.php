@@ -1,5 +1,6 @@
 <?php
 
+use App\School;
 use Illuminate\Database\Seeder;
 
 class SchoolsTableSeeder extends Seeder
@@ -11,6 +12,14 @@ class SchoolsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\School::class, 1)->create();
+        $faker = \Faker\Factory::create();
+        School::create([
+        'name'        => $faker->name,
+        'about'       => $faker->sentences(3, true),
+        'medium'      => $faker->randomElement(['bangla', 'english']),
+        'code'        => date("y").substr(number_format(time() * mt_rand(),0,'',''),0,6),
+        'established' => $faker->name,
+        'theme'       => 'flatly',
+    ]);
     }
 }

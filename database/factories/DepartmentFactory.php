@@ -1,4 +1,5 @@
 <?php
+namespace Database\Factories;
 
 use App\School;
 use App\Department;
@@ -9,7 +10,7 @@ $factory->define(Department::class, function (Faker $faker) {
         'school_id'       => function () use ($faker) {
             if (School::count())
                 return $faker->randomElement(School::pluck('id')->toArray());
-            else return factory(School::class)->create()->id;
+            else return Department::factory(School::class)->create()->id;
         },
         'department_name' => $faker->randomElement(['Bangla','English','Math']),
     ];

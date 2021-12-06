@@ -1,4 +1,5 @@
 <?php
+namespace Database\Factories;
 
 use App\Section;
 use App\Myclass;
@@ -11,7 +12,7 @@ $factory->define(Section::class, function (Faker $faker) {
         'class_id'       => function() use ($faker) {
             if (Myclass::count())
                 return $faker->randomElement(Myclass::pluck('id')->toArray());
-            else return factory(Myclass::class)->create()->id;
+            // else return factory(Myclass::class)->create()->id;
         },
     ];
 });

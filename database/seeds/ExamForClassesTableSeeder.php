@@ -1,5 +1,8 @@
 <?php
 
+use App\Exam;
+use App\ExamForClass;
+use App\Myclass;
 use Illuminate\Database\Seeder;
 
 class ExamForClassesTableSeeder extends Seeder
@@ -11,6 +14,12 @@ class ExamForClassesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\ExamForClass::class, 30)->create();
+        $faker = \Faker\Factory::create();
+        // factory(App\ExamForClass::class, 30)->create();
+        ExamForClass::create([
+            'class_id' => $faker->randomElement(Myclass::pluck('id')->toArray()),
+            'exam_id'  => $faker->randomElement(Exam::where('active', 1)->pluck('id')->toArray()),
+            'active'   => $faker->randomElement([0, 1]),
+        ]);
     }
 }
